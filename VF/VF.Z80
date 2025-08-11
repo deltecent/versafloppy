@@ -98,6 +98,7 @@
 ;	V0.87	Initial IY usage - untested
 ;	V0.88	IY working throughout. Seems solid for 1791 & 1795 chips.
 ;	V1.01	Set 1 track for 1K sector  8" CPM system tracks instead of 2
+;	V1.02	Strip parity bit from direct keyboard imput (if any).
 ;
 ;	To Do:-
 ;;	Add 5" dos sectors format initilization
@@ -271,6 +272,7 @@ CI:	IN	A,(0)		;console input
 	AND	A,02H
 	JR	Z,CI
 	IN	A,(1)		;return with character in A
+	AND	7FH		;Strip parity (IF ANY).
 	RET
 ;		
 CO:	IN	A,(0)		;console output (arrive with character in C)
